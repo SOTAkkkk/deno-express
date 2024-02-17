@@ -1,19 +1,17 @@
-// @ts-ignore
 import express from "npm:express@4.18.2";
-// @ts-ignore
-import data from "./data.json" assert { type: "json" };
+import data from "./data.json" with { type: "json" };
 
 const app = express();
 
-app.get("/", (req: any, res: any) => {
+app.get("/", (_req: express.Request, res: express.Response) => {
     res.send("Welcome to the Dinosaur API!");
 });
 
-app.get("/api", (req:any, res:any) => {
+app.get("/api", (_req: express.Request, res: express.Response) => {
     res.send(data);
 });
 
-app.get("/api/:dinosaur", (req:any, res:any) => {
+app.get("/api/:dinosaur", (req: express.Request, res: express.Response) => {
     if (req?.params?.dinosaur) {
         const found = data.find((item) =>
             item.name.toLowerCase() === req.params.dinosaur.toLowerCase()
